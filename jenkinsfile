@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    
+    stages {
+        
+        stage("checkout code"){
+          steps{
+            checkout scm
+          }
+        }
+        
+        stage('delete Existing clone') {
+            steps {
+                bat "if exist Weather_Prediction rd /q /s Weather_Prediction"
+            
+            }
+            
+        }
+        
+        stage('Clone repository') {
+            steps {
+                bat '''git clone https://github.com/Anas-hameed/Weather_Prediction.git
+                '''
+            }
+            
+        }
+         stage('change directory'){
+            steps {
+                bat "cd Weather_Prediction"
+            }
+         }
+        
+        
+        stage('Install Dependencies') {
+            steps {
+                bat '''cd Weather_Prediction 
+                pip install -r requirements.txt'''
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat '''cd Weather_Prediction 
+                flask run'''
+            }
+        }
+    }
+}
