@@ -7,6 +7,8 @@ To install and run:
     "ENV_NAME/Scripts/activate"
 
 
+
+
 3) Inside the repo folder, run:
     "pip install -r requirements.txt"
 
